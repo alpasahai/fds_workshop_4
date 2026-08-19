@@ -24,10 +24,11 @@ router.post('/auth', function (req, res) {
       birthdate: foundUser.birthdate,
       age: foundUser.age,
       email: foundUser.email,
-      valid: true
+      valid: true,
+      message: 'Login was successful!'
     });
   } else {
-    res.json({ valid: false });
+    res.json({ valid: false, message: 'Invalid email or password' });
   }
 });
 
