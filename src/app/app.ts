@@ -19,4 +19,15 @@ export class App {
     this.router.navigate(['/login/', id]);
 
   }
+
+  //locally storing the user if the user is logged in
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('currentUser');
+  }
+
+  //Ensuring the user is removed from the local server if the user is logged out
+  logout(){
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['/login']);
+  }
 }

@@ -1,5 +1,5 @@
 import { Component, inject,OnInit,signal} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Counter } from '../../services/counter';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +17,7 @@ import { environment } from '../../../environments/environment.development';
 })
 export class Login implements OnInit{
   route = inject(ActivatedRoute);
+  router = inject(Router);
   counter = inject(Counter);
   auth = inject(Auth);
   email:string="";
@@ -69,11 +70,21 @@ export class Login implements OnInit{
         
           if(response.valid == true){
              this.messageType = 'success';
+
+             //store the logged-in user (no password) so Profile can read it
+            localStorage.setItem('currentUser', JSON.stringify({
+              username: response.username,
+              birthdate: response.birthdate,
+              age: response.age,
+              email: response.email,
+              valid: response.valid
+            }));
             
              //hide message after 3 seconds
             setTimeout(() => {
                 this.message.set("") ;
                 this.messageType = null;
+                this.router.navigate(['/account']);
             },3000);
 
          

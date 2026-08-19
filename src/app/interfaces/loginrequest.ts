@@ -5,7 +5,11 @@ export interface Loginrequest {
 }
 
 export interface LoginResponse {
-  valid:boolean,
+  //Updating to accomodate with Week 5
   message: string;
-  
+  valid: boolean;
+  username?: string;
+  birthdate?: string;
+  age?: number;
+  email?: string;
 }

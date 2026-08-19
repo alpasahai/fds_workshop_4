@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-sm-9 col-md-7 collg-5 mx-auto">
+    <div class="card border-primary my-5">
+      <div class="card-body">
+        <h2 class="card-title">My Profile</h2>
+
+        @if (currentUser) {
+          <form (ngSubmit)="saveProfile()">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" [(ngModel)]="currentUser.username">
+
+            <label for="birthdate">Birth Date</label>
+            <input type="text" id="birthdate" name="birthdate" [(ngModel)]="currentUser.birthdate">
+
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" [(ngModel)]="currentUser.age">
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" [(ngModel)]="currentUser.email">
+
+            <button class="btn btn-primary" type="submit">Save</button>
+          </form>
+
+          @if (saved()) {
+            <p class="text-success">Profile saved!</p>
+          }
+        } @else {
+          <p>There is no user currently logged in.</p>
+        }
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,10 +10,17 @@ import { environment } from '../../environments/environment.development';
 
 
 export class Auth {
-  httpclient= inject(HttpClient);
+  private apiURL = environment.ServerURL_W5;
+  //httpclient= inject(HttpClient);
  
+  constructor(private http: HttpClient) {}
 
-  login(credentials:Loginrequest){
-    return this.httpclient.post<LoginResponse>(environment.ServerURL+"/api/login",credentials);
-  }
+login(credentials:Loginrequest){
+    const payload = {
+      email: credentials.email,
+      password: credentials.pwd,
+      userId: credentials.userId
+    };
+    return this.http.post<LoginResponse>(environment.ServerURL+"/api/auth",payload);
+}
 }
