@@ -80,12 +80,12 @@ export class Login implements OnInit{
               valid: response.valid
             }));
             
-             //hide message after 3 seconds
+             //hide message after 1 seconds
             setTimeout(() => {
                 this.message.set("") ;
                 this.messageType = null;
                 this.router.navigate(['/account']);
-            },3000);
+            },1000);
 
          
           }else{
@@ -96,10 +96,13 @@ export class Login implements OnInit{
                 this.messageType = null;
             },3000);
           }
+
+          //clearing the textboxes:
+          this.email = "";
+          this.pwd = "";
         },
        error:(err)=>{
         console.log('error response ',  err);
-        
         }
     })
 
